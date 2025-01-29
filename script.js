@@ -40,6 +40,10 @@ function sauvegarder() {
 function reinitialiser() {
     sauvegardeEl.textContent = " Pokémons - ";
     compteurEl.textContent = 0;
+
+    // Réinitialise le stockage local
+    localStorage.removeItem("captures");
+    localStorage.setItem("captures", sauvegardeEl.textContent);
 }
 
 const capturerBtn = document.getElementById("capturer-btn");
