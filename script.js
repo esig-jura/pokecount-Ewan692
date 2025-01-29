@@ -8,6 +8,10 @@
 
 console.log("Hello World");
 
+window.addEventListener("load", () => { // Attendre que la page soit chargée pour exécuter le code
+    sauvegardeEl.textContent = localStorage.getItem("captures") || ""; // Charger les captures sauvegardées ou une chaîne vide
+});
+
 let compteur = 0;
 const compteurEl = document.getElementById("compteur-el");
 const sauvegardeEl = document.getElementById("sauvegarde-el");
@@ -27,6 +31,21 @@ function capturer() {
 function sauvegarder() {
     let compteurStr = compteur + " Pokémons - ";
     sauvegardeEl.textContent += compteurStr; // Ajouter la valeur actuelle du compteur
+    localStorage.setItem("captures", sauvegardeEl.textContent); // Sauvegarder les captures dans le localStorage
     compteur = 0;
     compteurEl.textContent = compteur;
+    compteurEl.style.color = "black"; // Réinitialiser la couleur du compteur
 }
+
+function reinitialiser() {
+    sauvegardeEl.textContent = " Pokémons - ";
+    compteurEl.textContent = 0;
+}
+
+const capturerBtn = document.getElementById("capturer-btn");
+const sauvegarderBtn = document.getElementById("sauvegarder-btn");
+const reinitialiserBtn = document.getElementById("reinitialiser-btn");
+
+capturerBtn.addEventListener("click", capturer);
+sauvegarderBtn.addEventListener("click", sauvegarder);
+reinitialiserBtn.addEventListener("click", reinitialiser);
